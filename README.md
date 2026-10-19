@@ -2,8 +2,7 @@
 
 The placeholder page `franziska-faust-keramik.de` serves until the Shopify store
 launches. Plain static HTML on GitHub Pages: no build, no JavaScript, no cookies, no
-third-party requests. The real site lives in `../franziska_faust_keramik`; its brand
-tokens, display font, logo and photo are copied from there.
+third-party requests.
 
 | File                                 | What it is                                                                         |
 | ------------------------------------ | ---------------------------------------------------------------------------------- |
