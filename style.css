@@ -1,0 +1,372 @@
+/* The one stylesheet for the coming-soon page and its two legal pages.
+
+   A cut-down copy of the real theme's language (franziska_faust_keramik,
+   docs/design.md): the same seven colour tokens, the same Fraunces display
+   face, the same arch and tile shapes. The body face is the system sans
+   rather than Outfit, which ships with Shopify's font library and not here.
+   Everything is served from this repo, so no request leaves the domain. */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/fraunces-variable.woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #fcf6ec;
+  --ink: #2e221d;
+  --terracotta: #c97a68;
+  --ochre: #e2996b;
+  --sage: #6fa48f;
+  --pale-blue: #9fbfd1;
+  --terracotta-deep: #9e5f50;
+
+  --font-display: 'Fraunces', ui-serif, georgia, 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', roboto, 'Helvetica Neue', arial, sans-serif;
+
+  --space-xs: clamp(0.625rem, 0.58rem + 0.22vw, 0.875rem);
+  --space-s: clamp(0.875rem, 0.8rem + 0.37vw, 1.25rem);
+  --space-m: clamp(1.25rem, 1.05rem + 0.98vw, 2rem);
+  --space-l: clamp(2rem, 1.61rem + 1.96vw, 3.5rem);
+  --space-xl: clamp(2.75rem, 2.1rem + 3.27vw, 5.25rem);
+  --gutter: max(16px, var(--space-m));
+
+  --text-xs: clamp(0.8125rem, 0.79rem + 0.09vw, 0.875rem);
+  --text-s: clamp(1rem, 0.9825rem + 0.09vw, 1.0625rem);
+  --text-body: clamp(1.0625rem, 1.0325rem + 0.16vw, 1.1875rem);
+  --text-lead: clamp(1.25rem, 1.1525rem + 0.44vw, 1.5625rem);
+  --text-1: clamp(1.375rem, 1.19rem + 0.88vw, 2rem);
+  --text-2: clamp(1.75rem, 1.31rem + 2.19vw, 3.25rem);
+  --text-3: clamp(2.25rem, 1.34rem + 4.38vw, 5rem);
+
+  --arch: 16rem 18rem 0 2.5rem / 13rem 15rem 0 2rem;
+  --tile: 1.5rem 0.35rem 1.5rem 1.5rem;
+}
+
+@media (max-width: 47.99rem) {
+  :root {
+    --arch: 9rem 10.5rem 0 1.5rem / 7.5rem 8.5rem 0 1.25rem;
+    --tile: 1rem 0.25rem 1rem 1rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  hyphens: auto;
+  hyphenate-limit-chars: 10 5 4;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+p,
+ul,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+/* ── Type ─────────────────────────────────────────────────────────────── */
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings:
+    'SOFT' 40,
+    'WONK' 1;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  hyphens: manual;
+}
+
+h1 {
+  font-size: var(--text-3);
+}
+
+h2 {
+  font-size: var(--text-2);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings:
+    'SOFT' 30,
+    'WONK' 0;
+  font-weight: 500;
+  font-size: var(--text-1);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  hyphens: manual;
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.lead {
+  font-size: var(--text-lead);
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 3px;
+}
+
+/* ── The landing page ──────────────────────────────────────────────────── */
+
+.intro {
+  flex: 1;
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: var(--space-l) var(--gutter) var(--space-xl);
+  display: grid;
+  grid-template-areas:
+    'text'
+    'photo'
+    'contact';
+  gap: var(--space-l);
+  align-items: start;
+}
+
+@media (min-width: 48rem) {
+  .intro {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas:
+      'text photo'
+      'contact photo';
+    column-gap: var(--space-xl);
+    padding-top: var(--space-xl);
+  }
+}
+
+.intro__text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  max-width: 36rem;
+}
+
+.intro__text h1 {
+  margin-bottom: var(--space-xs);
+}
+
+.intro__text .logo {
+  width: 5.5rem;
+  margin-bottom: var(--space-m);
+}
+
+.intro__text .soon {
+  margin-top: var(--space-xs);
+}
+
+/* The arch only ever holds a photograph, and type never sits inside it. */
+.arch {
+  grid-area: photo;
+  display: block;
+  width: 100%;
+  border-radius: var(--arch);
+  overflow: hidden;
+  background-color: var(--sage);
+}
+
+.arch img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: 40% 50%;
+}
+
+@media (max-width: 47.99rem) {
+  .arch img {
+    aspect-ratio: 4 / 5;
+    object-position: 40% 60%;
+  }
+}
+
+/* A tile with a field. Ink text clears AA on terracotta (4.75); paper text
+   on any fill fails, so none appears here. */
+.contact {
+  grid-area: contact;
+  max-width: 36rem;
+  padding: var(--space-m);
+  border-radius: var(--tile);
+  background-color: var(--terracotta);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.contact h2 {
+  font-size: var(--text-1);
+}
+
+.contact__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.contact__list span {
+  display: inline-block;
+  min-width: 6.5rem;
+  font-weight: 500;
+}
+
+.contact__list a {
+  overflow-wrap: anywhere;
+  hyphens: manual;
+}
+
+/* Too narrow for label and email address on one line, so every label
+   stacks, not only the one the address pushes down. */
+@media (max-width: 29.99rem) {
+  .contact__list {
+    gap: var(--space-xs);
+  }
+
+  .contact__list span {
+    display: block;
+  }
+}
+
+.address {
+  font-size: var(--text-s);
+}
+
+/* ── Legal pages ───────────────────────────────────────────────────────── */
+
+.legal {
+  flex: 1;
+  width: 100%;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--space-l) var(--gutter) var(--space-xl);
+}
+
+.legal__home {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-s);
+  margin-bottom: var(--space-l);
+}
+
+.legal__home img {
+  width: 3rem;
+}
+
+.legal h1 {
+  font-size: var(--text-2);
+  margin-bottom: var(--space-m);
+}
+
+.legal h2 {
+  font-family: var(--font-display);
+  font-variation-settings:
+    'SOFT' 30,
+    'WONK' 0;
+  font-weight: 500;
+  font-size: var(--text-1);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: var(--space-l) 0 var(--space-xs);
+}
+
+.legal p,
+.legal ul {
+  max-width: 34em;
+}
+
+.legal p + p,
+.legal p + ul,
+.legal ul + p {
+  margin-top: var(--space-s);
+}
+
+.legal ul {
+  padding-left: 1.2em;
+}
+
+.legal a {
+  overflow-wrap: anywhere;
+}
+
+/* ── Footer: the one dark band ─────────────────────────────────────────── */
+
+.footer {
+  background-color: var(--ink);
+  color: var(--paper);
+  font-size: var(--text-s);
+}
+
+.footer__inner {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: var(--space-m) var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-m);
+}
+
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-m);
+}
